@@ -37,15 +37,15 @@ public class UserController {
     }
 
 
-    @PostMapping("/create")
-    public ResponseEntity create(@RequestBody @Valid UserRegisterDTO data) throws Exception {
-        userService.insert(new User(data.name(), data.login(), data.password(), UserType.valueOf(data.type())));
+    @PostMapping("/save")
+    public ResponseEntity save(@RequestBody @Valid UserRegisterDTO data) throws Exception {
+        userService.insert(new User(data.name(), data.email(), data.password(), UserType.valueOf(data.type())));
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable Long id, @RequestBody @Valid UserRegisterDTO data) throws Exception {
-        User updatedUser = userService.update(new User(id, data.name(), data.login(), data.password(), UserType.valueOf(data.type())));
+        User updatedUser = userService.update(new User(id, data.name(), data.email(), data.password(), UserType.valueOf(data.type())));
         return ResponseEntity.ok().body(new UserResponseDTO(updatedUser.getName(), updatedUser.getEmail(), updatedUser.getType().getType()));
     }
 
