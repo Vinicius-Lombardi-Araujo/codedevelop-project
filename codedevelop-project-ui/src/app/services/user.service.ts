@@ -14,24 +14,24 @@ export class UserService {
 
   constructor() { }
 
-  listAll(): Observable<User[]>{
-    return this.http.get<User[]>(this.API+"/listAll");
+  findAll(): Observable<User[]>{
+    return this.http.get<User[]>(this.API);
   }
 
   delete(id: number): Observable<string>{
     return this.http.delete<string>(this.API+"/delete/"+id, {responseType: 'text' as 'json'});
   }
 
-  save(user: User): Observable<string>{
+  save(user: User): Observable<Object>{
     return this.http.post<string>(this.API+"/save", user, {responseType: 'text' as 'json'});
   }
 
-  update(user: User, id: number): Observable<string>{
+  update(user: User, id: number): Observable<Object>{
     return this.http.put<string>(this.API+"/update/"+id, user, {responseType: 'text' as 'json'});
   }
 
   findById(id: number): Observable<User>{
-    return this.http.get<User>(this.API+"/findById/"+id);
+    return this.http.get<User>(this.API+"/"+id);
   }
 
 }
